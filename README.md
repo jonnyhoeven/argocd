@@ -1,15 +1,13 @@
-# microk8s
+# microK8S & argocd
 
-##
+Setup ```microK8S```, ```agrocd``` and 
 
-https://argo-cd.readthedocs.io/en/stable/
-https://github.com/argoproj/argo-cd/tree/stable/manifests
-
-https://github.com/guilhem/freeipa-issuer
-https://benbrougher.tech/posts/microk8s-ingress/
-https://microk8s.io/docs/addon-metallb
-
-
+## Links
+ - https://argo-cd.readthedocs.io/en/stable/
+ - https://github.com/argoproj/argo-cd/tree/stable/manifests
+ - https://github.com/guilhem/freeipa-issuer
+ - https://benbrougher.tech/posts/microk8s-ingress/
+ - https://microk8s.io/docs/addon-metallb
 
 
 ### install microk8s
@@ -53,8 +51,10 @@ microk8s dashboard-proxy
 ### Install argocd
 ```bash
 microk8s kubectl create namespace argocd
-microk8s kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-microk8s kubectl apply -n argocd -f ./argocd/install.yaml
+#microk8s kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+microk8s kubectl apply -n argocd -f ./namespaces/argocd/argocd.install.argocd.yaml
+microk8s kubectl apply -n argocd -f ./argocd.ingress.argocd.yaml
+
 microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
