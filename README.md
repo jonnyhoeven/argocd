@@ -4,6 +4,7 @@ https://github.com/guilhem/freeipa-issuer
 
 https://argo-cd.readthedocs.io/en/stable/
 https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-organizing-with-namespaces
+https://benbrougher.tech/posts/microk8s-ingress/
 
 ```bash
 sudo apt-get update
