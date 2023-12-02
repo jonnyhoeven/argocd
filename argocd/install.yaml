@@ -20715,6 +20715,8 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
+data:
+  server.insecure: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -20732,8 +20734,6 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
   name: argocd-notifications-cm
-data:
-  server.insecure: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
