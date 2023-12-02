@@ -1,6 +1,8 @@
 # microK8S & argocd
 
-Setup ```microK8S```, ```agrocd``` and 
+Setup ```microK8S```,```ingress```, ```metallb```, ```agrocd```
+
+for local dev environments
 
 ## Links
  - https://argo-cd.readthedocs.io/en/stable/
@@ -10,25 +12,32 @@ Setup ```microK8S```, ```agrocd``` and
  - https://microk8s.io/docs/addon-metallb
 
 
-### install microk8s
+### install microK8S
 ```bash
 sudo snap install microk8s --classic --channel=1.28
-sudo usermod -a -G microk8s john
-sudo chown -R john ~/.kube
+sudo usermod -a -G microk8s $USER
+sudo chown -R $USER ~/.kube
 newgrp microk8s
 ```
 
 ### inspect and fix issues
 ```bash
 microk8s inspect
+```
+
+fix docker
+```bash
 nano /etc/docker/daemon.json
+```
+
 ```json
 {
     "insecure-registries" : ["localhost:32000"] 
 }
 ```
 
-```
+fix iptables
+```bash
 sudo iptables -P FORWARD ACCEPT 
 sudo apt-get install iptables-persistent
 echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.conf
@@ -42,7 +51,7 @@ microk8s kubectl get all --all-namespaces
 
 microk8s enable dns
 microk8s enable ingress
-microk8s enable metallb:192.168.1.20-192.168.1.40
+microk8s enable metallb:192.168.1.20-192.168.1.40 # change to your subnet
 microk8s stop && microk8s start
 
 microk8s dashboard-proxy
@@ -58,6 +67,15 @@ microk8s kubectl apply -n argocd -f ./argocd.ingress.argocd.yaml
 microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
+### Hostnames:
+Set the following hosts in your hosts-file to ```localhost``` or ```127.0.0.1```
+e.g.
+```/etc/hosts
+127.0.0.1       guestbook.sid.k8s.test
+127.0.0.1       guestbook.stable.k8s.test
+127.0.0.1       dashboard.k8s.test
+127.0.0.1       argocd.k8s.test
+```
 
 ### install argocli
 ```bash
@@ -66,10 +84,12 @@ sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 ```
 
-
-microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-
+Maybe not run for now...
+```bash
+``#microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 ```
+
+```bash/microk8s status 
 Enabled
     dashboard            # (core) The Kubernetes dashboard
     dns                  # (core) CoreDNS
@@ -78,3 +98,4 @@ Enabled
     helm3                # (core) Helm 3 - the package manager for Kubernetes
     ingress              # (core) Ingress controller for external access
     metrics-server       # (core) K8s Metrics Server for API access to service metrics
+```
