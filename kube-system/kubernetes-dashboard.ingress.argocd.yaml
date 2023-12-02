@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-http-ingress
+  name: kubernetes-dashboard-http-ingress
 spec:
   rules:
-    - host: "argocd.k8s.test"
+    - host: "dashboard.k8s.test"
     - http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: argocd-server
+                name: ubernetes-dashboard
                 port:
                   number: 443
