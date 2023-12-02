@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: argocd.k8s.test
+    - host: "argocd.k8s.test"
       http:
         paths:
           - path: /
