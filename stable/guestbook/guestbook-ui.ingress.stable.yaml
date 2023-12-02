@@ -1,19 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-http-ingress
-  namespace: argocd
-annotations:
-  nginx.ingress.kubernetes.io/rewrite-target: /$1
-  nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
+  name: guestbook-ui-http-ingress
 spec:
   rules:
-    - http:
+    - host: "guestbook.stable.k8s.test"
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: argocd-server
+                name: guestbook-ui
                 port:
                   number: 80

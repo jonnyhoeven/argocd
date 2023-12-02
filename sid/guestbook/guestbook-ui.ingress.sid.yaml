@@ -4,7 +4,8 @@ metadata:
   name: guestbook-ui-http-ingress
 spec:
   rules:
-    - http:
+    - host: "guestbook.sid.k8s.test"
+      http:
         paths:
           - path: /
             pathType: Prefix
