@@ -4,7 +4,7 @@ metadata:
   name: guestbook-ui-http-ingress
 spec:
   rules:
-    - host: "guestbook.sid.k8s.test"
+    - host: guestbook.sid.k8s.test
       http:
         paths:
           - path: /
