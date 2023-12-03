@@ -16,5 +16,6 @@ spec:
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
-    serversTransport:
-        insecureSkipVerify: true
+      http:
+        tls:
+          insecureSkipVerify: true
