@@ -4,7 +4,7 @@ metadata:
   name: kubernetes-dashboard-http-ingress
 spec:
   rules:
-    - host: "dashboard.k8s.test"
+    - host: dashboard.k8s.test
     - http:
         paths:
           - path: /
