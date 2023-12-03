@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: stb
+  name: guestbook-stb
   namespace: argocd
 destination:
   namespace: stb
@@ -14,6 +14,8 @@ source:
   path: namespaces/stb
   repoURL: https://github.com/jonnyhoeven/argocd.git
 syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
   automated:
     prune: true
     selfHeal: true
