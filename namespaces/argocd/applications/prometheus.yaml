@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 25.8.0
-    chart: prometheus-community/prometheus
+    chart: prometheus-community
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: prometheus
