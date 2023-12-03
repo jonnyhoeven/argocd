@@ -2,17 +2,15 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd
-project: default
-source:
-  repoURL: 'https://github.com/jonnyhoeven/argocd.git'
-  path: namespaces/argocd
-  directory:
-    recurse: true
-    jsonnet: {}
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: argocd
-syncPolicy:
-  syncOptions:
-    - CreateNamespace=true
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/jonnyhoeven/argocd.git'
+    path: namespaces/argocd
+    directory:
+      recurse: true
+      jsonnet: {}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
 

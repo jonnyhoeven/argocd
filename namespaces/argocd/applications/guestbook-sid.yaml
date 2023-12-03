@@ -2,20 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: guestbook-sid
-  namespace: argocd
-destination:
-  namespace: sid
-  server: https://kubernetes.default.svc
-project: default
-source:
-  directory:
-    jsonnet: {}
-    recurse: true
-  path: namespaces/sid
-  repoURL: https://github.com/jonnyhoeven/argocd.git
-syncPolicy:
-  syncOptions:
-    - CreateNamespace=true
-  automated:
-    prune: true
-    selfHeal: true
+spec:
+  destination:
+    namespace: sid
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: namespaces/sid
+    repoURL: https://github.com/jonnyhoeven/argocd.git
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

@@ -2,18 +2,18 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: kubernetes-dashboard
-  namespace: argocd
-destination:
-  namespace: kubernetes-dashboard
-  server: https://kubernetes.default.svc
-project: default
-source:
-  directory:
-    jsonnet: {}
-    recurse: true
-  path: namespaces/kubernetes-dashboard
-  repoURL: https://github.com/jonnyhoeven/argocd.git
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
+spec:
+  destination:
+    namespace: kubernetes-dashboard
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: namespaces/kubernetes-dashboard
+    repoURL: https://github.com/jonnyhoeven/argocd.git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
