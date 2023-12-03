@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: kube-system
+  namespace: argocd
 destination:
   namespace: kube-system
   server: https://kubernetes.default.svc

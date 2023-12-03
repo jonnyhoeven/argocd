@@ -1,16 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: stb
   namespace: argocd
 destination:
-  namespace: argocd
+  namespace: stb
   server: https://kubernetes.default.svc
 project: default
 source:
   directory:
     jsonnet: {}
     recurse: true
-  path: namespaces/argocd
+  path: namespaces/stb
   repoURL: https://github.com/jonnyhoeven/argocd.git
-
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true

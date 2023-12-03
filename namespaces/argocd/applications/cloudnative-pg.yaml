@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cloudnative-pg
+  namespace: argocd
 destination:
   namespace: cloudnative-pg
   server: https://kubernetes.default.svc
@@ -13,6 +14,6 @@ source:
   path: namespaces/cloudnative-pg
   repoURL: https://github.com/jonnyhoeven/argocd.git
 syncPolicy:
-  manual:
+  automated:
     prune: true
     selfHeal: true

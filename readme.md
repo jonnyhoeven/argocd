@@ -131,6 +131,22 @@ argocd repo add https://github.com/jonnyhoeven/argocd.git \
   --password *obfuscated*
 ```
 
+
+#### argocd
+```bash
+kubectl create namespace argocd
+argocd app create argocd \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/argocd \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace argocd \
+  --sync-policy automated \
+  --self-heal \
+  --directory-recurse
+```
+
+
+
 #### Sid namespace
 ```bash
 kubectl create namespace sid
@@ -228,18 +244,7 @@ argocd app create prometheus \
   --directory-recurse
 ```
 
-#### argocd
-```bash
-kubectl create namespace argocd
-argocd app create argocd \
-  --repo https://github.com/jonnyhoeven/argocd.git \
-  --path namespaces/argocd \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace argocd \
-  --sync-policy automated \
-  --self-heal \
-  --directory-recurse
-```
+
   
 
 
