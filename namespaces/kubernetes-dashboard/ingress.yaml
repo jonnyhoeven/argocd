@@ -11,4 +11,18 @@ spec:
       services:
         - name: kubernetes-dashboard
           port: 443
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dashboard.k8s.test`) #/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+      services:
+        - port: 443
+          name: kubernetes-dashboard
 
