@@ -1,13 +1,15 @@
 # k3d
 
 ## Links
+- https://github.com/guilhem/freeipa-issuer
 - https://argo-cd.readthedocs.io/en/stable
 - https://argo-cd.readthedocs.io/en/stable/operator-manual/disaster_recovery
 - https://github.com/argoproj/argo-cd/tree/stable/manifests
-- https://github.com/guilhem/freeipa-issuer
+
 - https://benbrougher.tech/posts/microk8s-ingress
 - https://microk8s.io/docs/addon-metallb 
 - https://k3d.io/v5.6.0/
+
 
 ## Todo
 - [ ] setup freeipa issuer
@@ -87,7 +89,7 @@ kubectl create namespace argocd
 kubectl apply -f ./namespaces/argocd/argocd-cmd-params-cm.yaml -n argocd 
 #kubectl apply -f ./namespaces/argocd/argocd.install.argocd.yaml -n argocd
 kubectl apply -f ./namespaces/argocd/argocd-ha.install.argocd.yaml -n argocd
-#kubectl apply -f ./namespaces/argocd/argocd.ingress.argocd.yaml -n argocd
+kubectl apply -f ./namespaces/argocd/argocd.ingress.argocd.yaml -n argocd
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 # get argocd initial admin secret with kubectl and delete it
@@ -98,7 +100,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 Log in to argocd using the initial admin secret and change the password.
 default username is admin.
 localhost:8080
-
 
 Don't forget to delete the secret after you have changed the password.
 ```bash
@@ -118,15 +119,20 @@ argocd login argocd.k8s.test
 
 ### Setup apps and repositories
 ```bash
-
-kubectl config get-contexts -o name
+#kubectl config get-contexts -o name
 #argocd cluster add k3d-sidcluster # can be used to connect/manage external clusters
-kubectl config set-context --current --namespace=sid
+#kubectl config set-context --current --namespace=sid
+```
 
+#### Add git repo to argocd
+```bash
 argocd repo add https://github.com/jonnyhoeven/argocd.git \
   --username anything \
   --password *obfuscated*
+```
 
+#### Sid namespace
+```bash
 kubectl create namespace sid
 argocd app create guestbook-sid \
   --repo https://github.com/jonnyhoeven/argocd.git \
@@ -139,7 +145,10 @@ argocd app create guestbook-sid \
   --allow-empty \
   --directory-recurse   
 curl -k -H "Host: guestbook.sid.k8s.test" https://guestbook.sid.k8s.test
+```
 
+#### Stable namespace
+```bash
 kubectl create namespace stb
 argocd app create guestbook-stb \
   --repo https://github.com/jonnyhoeven/argocd.git \
@@ -152,8 +161,10 @@ argocd app create guestbook-stb \
   --allow-empty \
   --directory-recurse   
 curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
+```
 
-
+#### traefik settings and dashboard ingress
+```bash
 kubectl create namespace kube-system
 argocd app create kube-system \
   --repo https://github.com/jonnyhoeven/argocd.git \
@@ -165,9 +176,10 @@ argocd app create kube-system \
   --auto-prune \
   --allow-empty \
   --directory-recurse   
+```
 
-
-
+#### kubernetes dashboard with ingress
+```bash
 kubectl create namespace kubernetes-dashboard
 argocd app create kubernetes-dashboard \
   --repo https://github.com/jonnyhoeven/argocd.git \
@@ -179,14 +191,43 @@ argocd app create kubernetes-dashboard \
   --auto-prune \
   --allow-empty \
   --directory-recurse   
-  
+
 kubectl proxy
-curl -k -H "Host: dashboard.k8s.test" http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+#http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
+curl -k -H "Host: dashboard.k8s.test" https://dashboard.k8s.test
+``` 
 
-
+#### cloudnative-pg
+```bash
+kubectl create namespace cloudnative-pg
+argocd app create cloudnative-pg \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/cloudnative-pg \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace cloudnative-pg \
+  --sync-policy automated \
+  --self-heal \
+  --auto-prune \
+  --allow-empty \
+  --directory-recurse
 ```
 
+#### prometheus
+```bash
+kubectl create namespace prometheus
+argocd app create prometheus \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/prometheus \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace prometheus \
+  --sync-policy automated \
+  --self-heal \
+  --auto-prune \
+  --allow-empty \
+  --directory-recurse
+```
+  
 
 
 

@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-community-application
+  namespace: prometheus
+spec:
+  project: default
+  source:
+    chart: prometheus-community
+    repoURL:  https://prometheus-community.github.io/helm-charts
+    targetRevision: 1.16.1
+    helm:
+      releaseName: prometheus-community
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace:
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-community-application
+  namespace: prometheus
+spec:
+  project: default
+  source:
+    chart: prometheus-community
+    repoURL:  https://prometheus-community.github.io/helm-charts
+    targetRevision: 1.16.1
+    helm:
+      releaseName: kube-prometheus-stack
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace:
