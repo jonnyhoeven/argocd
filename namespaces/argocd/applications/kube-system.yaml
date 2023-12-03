@@ -13,7 +13,6 @@ source:
   path: namespaces/kube-system
   repoURL: https://github.com/jonnyhoeven/argocd.git
 syncPolicy:
-  automated:
-    allowEmpty: true
-    prune: false
+  manual:
+    prune: true
     selfHeal: true
