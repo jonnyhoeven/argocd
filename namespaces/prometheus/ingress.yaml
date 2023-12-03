@@ -9,5 +9,5 @@ spec:
     - kind: Rule
       match: Host(`prometheus.k8s.test`)
       services:
-        - name: guestbook-ui
+        - name: prometheus-server
           port: 80
