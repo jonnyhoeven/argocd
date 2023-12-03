@@ -76,10 +76,8 @@ sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 ```
 
-Maybe not run for now...
-```bash
-``#microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-```
+### Restore argocd
+
 
 ```bash/microk8s status 
 Enabled
@@ -98,6 +96,6 @@ e.g.
 ```/etc/hosts
 127.0.0.1       guestbook.sid.k8s.test
 127.0.0.1       guestbook.stable.k8s.test
-127.0.0.1       dashboard.k8s.test
+#127.0.0.1       dashboard.k8s.test
 127.0.0.1       argocd.k8s.test
 ```
