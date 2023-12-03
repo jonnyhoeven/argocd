@@ -132,7 +132,7 @@ argocd repo add https://github.com/jonnyhoeven/argocd.git \
 ```
 
 
-#### argocd
+#### Fire off argocd app creation
 ```bash
 kubectl create namespace argocd
 argocd app create argocd \
@@ -143,7 +143,6 @@ argocd app create argocd \
   --sync-policy automated \
   --self-heal \
   --directory-recurse \
-  --sync-policy automated \
   --auto-prune \
   --allow-empty
 ```
@@ -159,8 +158,6 @@ curl -k -H "Host: guestbook.sid.k8s.test" https://guestbook.sid.k8s.test
 ```bash
 curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
 ```
-
-
 
 #### kubernetes dashboard with ingress
 ```bash
