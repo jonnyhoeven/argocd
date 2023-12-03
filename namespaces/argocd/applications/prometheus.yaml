@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/jonnyhoeven/argocd.git'
+    chart: 'https://prometheus-community.github.io/helm-charts'
     path: namespaces/prometheus
     directory:
       recurse: true
