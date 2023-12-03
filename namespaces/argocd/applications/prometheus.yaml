@@ -5,11 +5,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: 'https://prometheus-community.github.io/helm-charts'
-    path: namespaces/prometheus
-    directory:
-      recurse: true
-      jsonnet: {}
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-community
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: prometheus
