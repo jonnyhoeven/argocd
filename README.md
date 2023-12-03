@@ -5,10 +5,11 @@ Setup ```microK8S```,```ingress```, ```metallb```, ```agrocd```
 for local dev environments
 
 ## Links
- - https://argo-cd.readthedocs.io/en/stable/
+ - https://argo-cd.readthedocs.io/en/stable
+ - https://argo-cd.readthedocs.io/en/stable/operator-manual/disaster_recovery
  - https://github.com/argoproj/argo-cd/tree/stable/manifests
  - https://github.com/guilhem/freeipa-issuer
- - https://benbrougher.tech/posts/microk8s-ingress/
+ - https://benbrougher.tech/posts/microk8s-ingress
  - https://microk8s.io/docs/addon-metallb
 
 
@@ -51,6 +52,7 @@ microk8s kubectl get all --all-namespaces
 
 microk8s enable dns
 microk8s enable ingress
+microk8s enable dashboard
 microk8s enable metallb:192.168.1.20-192.168.1.40 # change to your subnet
 microk8s stop && microk8s start
 
@@ -65,16 +67,6 @@ microk8s kubectl apply -n argocd -f ./namespaces/argocd/argocd.install.argocd.ya
 microk8s kubectl apply -n argocd -f ./argocd.ingress.argocd.yaml
 
 microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
-
-### Hostnames:
-Set the following hosts in your hosts-file to ```localhost``` or ```127.0.0.1```
-e.g.
-```/etc/hosts
-127.0.0.1       guestbook.sid.k8s.test
-127.0.0.1       guestbook.stable.k8s.test
-127.0.0.1       dashboard.k8s.test
-127.0.0.1       argocd.k8s.test
 ```
 
 ### install argocli
@@ -98,4 +90,16 @@ Enabled
     helm3                # (core) Helm 3 - the package manager for Kubernetes
     ingress              # (core) Ingress controller for external access
     metrics-server       # (core) K8s Metrics Server for API access to service metrics
+```
+
+### Hostnames:
+Set the following hosts in your hosts-file to ```localhost``` or ```127.0.0.1```
+e.g.
+```/etc/hosts
+127.0.0.1       dashboard.k8s.test
+127.0.0.1       argocd.k8s.test
+
+127.0.0.1       guestbook.sid.k8s.test
+127.0.0.1       guestbook.stb.k8s.test
+
 ```
