@@ -154,7 +154,21 @@ argocd app create guestbook-stb \
 curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
 
 
-kubectl create namespace kubernetes-dashboard
+kubectl create namespace kube-system
+argocd app create kube-system \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/kube-system \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace kube-system \
+  --sync-policy automated \
+  --self-heal \
+  --auto-prune \
+  --allow-empty \
+  --directory-recurse   
+
+
+
+kubectl create namespace kube-dashboard
 argocd app create kubernetes-dashboard \
   --repo https://github.com/jonnyhoeven/argocd.git \
   --path namespaces/kubernetes-dashboard \
