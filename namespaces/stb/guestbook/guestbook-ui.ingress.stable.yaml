@@ -1,16 +1,13 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: guestbook-ui-http-ingress
 spec:
-  rules:
-    - host: guestbook.stb.k8s.test
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: guestbook-ui
-                port:
-                  number: 80
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`guestbook.stb.k8s.test`)
+      services:
+        - name: guestbook-ui
+          port: 80

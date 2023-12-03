@@ -138,23 +138,22 @@ argocd app create guestbook-sid \
   --auto-prune \
   --allow-empty \
   --directory-recurse   
+curl -k -H "Host: guestbook.sid.k8s.test" https://guestbook.sid.k8s.test
 
 kubectl create namespace stb
-argocd app create guestbook-sid \
+argocd app create guestbook-stb \
   --repo https://github.com/jonnyhoeven/argocd.git \
-  --path namespaces/sid/guestbook \
+  --path namespaces/stb/guestbook \
   --dest-server https://kubernetes.default.svc \
-  --dest-namespace sid \
+  --dest-namespace stb \
   --sync-policy automated \
   --self-heal \
   --auto-prune \
   --allow-empty \
   --directory-recurse   
-
+curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
 ```
 
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git 
---path guestbook --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse
 
 
 
