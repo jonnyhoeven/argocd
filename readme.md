@@ -142,57 +142,25 @@ argocd app create argocd \
   --dest-namespace argocd \
   --sync-policy automated \
   --self-heal \
-  --directory-recurse
+  --directory-recurse \
+  --sync-policy automated \
+  --auto-prune \
+  --allow-empty
 ```
 
 
 
 #### Sid namespace
 ```bash
-kubectl create namespace sid
-argocd app create guestbook-sid \
-  --repo https://github.com/jonnyhoeven/argocd.git \
-  --path namespaces/sid/guestbook \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace sid \
-  --sync-policy automated \
-  --self-heal \
-  --auto-prune \
-  --allow-empty \
-  --directory-recurse   
 curl -k -H "Host: guestbook.sid.k8s.test" https://guestbook.sid.k8s.test
 ```
 
 #### Stable namespace
 ```bash
-kubectl create namespace stb
-argocd app create guestbook-stb \
-  --repo https://github.com/jonnyhoeven/argocd.git \
-  --path namespaces/stb/guestbook \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace stb \
-  --sync-policy automated \
-  --self-heal \
-  --auto-prune \
-  --allow-empty \
-  --directory-recurse   
 curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
 ```
 
-#### traefik settings and dashboard ingress
-```bash
-kubectl create namespace kube-system
-argocd app create kube-system \
-  --repo https://github.com/jonnyhoeven/argocd.git \
-  --path namespaces/kube-system \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace kube-system \
-  --sync-policy automated \
-  --self-heal \
-  --auto-prune \
-  --allow-empty \
-  --directory-recurse   
-```
+
 
 #### kubernetes dashboard with ingress
 ```bash
