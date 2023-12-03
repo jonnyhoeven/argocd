@@ -12,7 +12,3 @@ source:
     recurse: true
   path: namespaces/kube-system
   repoURL: https://github.com/jonnyhoeven/argocd.git
-syncPolicy:
-  manual:
-    prune: true
-    selfHeal: true

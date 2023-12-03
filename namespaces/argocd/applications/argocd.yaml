@@ -13,7 +13,7 @@ source:
   path: namespaces/argocd
   repoURL: https://github.com/jonnyhoeven/argocd.git
 syncPolicy:
-  automated:
+  manual:
     allowEmpty: true
     prune: false
     selfHeal: true
