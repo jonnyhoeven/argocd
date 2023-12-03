@@ -165,7 +165,9 @@ argocd app create kubernetes-dashboard \
   --auto-prune \
   --allow-empty \
   --directory-recurse   
-curl -k -H "Host: dashboard.k8s.test" https://dashboard.k8s.test
+  
+kubectl proxy
+curl -k -H "Host: dashboard.k8s.test" http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
 
 
