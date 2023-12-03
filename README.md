@@ -96,10 +96,8 @@ Enabled
 Set the following hosts in your hosts-file to ```localhost``` or ```127.0.0.1```
 e.g.
 ```/etc/hosts
+127.0.0.1       guestbook.sid.k8s.test
+127.0.0.1       guestbook.stable.k8s.test
 127.0.0.1       dashboard.k8s.test
 127.0.0.1       argocd.k8s.test
-
-127.0.0.1       guestbook.sid.k8s.test
-127.0.0.1       guestbook.stb.k8s.test
-
 ```
