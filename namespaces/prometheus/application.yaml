@@ -18,7 +18,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-community-application
+  name: kube-prometheus-stack-application
   namespace: prometheus
 spec:
   project: default
