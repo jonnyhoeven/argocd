@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: kube-prometheus-stack-helm
 spec:
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 25.8.0
-    chart: prometheus
+    targetRevision: 55.0.0
+    chart: kube-prometheus-stack
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: prometheus
