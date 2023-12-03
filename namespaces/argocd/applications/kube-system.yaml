@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-system
+destination:
+  namespace: kube-system
+  server: https://kubernetes.default.svc
+project: default
+source:
+  directory:
+    jsonnet: {}
+    recurse: true
+  path: namespaces/kube-system
+  repoURL: https://github.com/jonnyhoeven/argocd.git
+syncPolicy:
+  automated:
+    allowEmpty: true
+    prune: false
+    selfHeal: true

@@ -227,6 +227,19 @@ argocd app create prometheus \
   --allow-empty \
   --directory-recurse
 ```
+
+#### argocd
+```bash
+kubectl create namespace argocd
+argocd app create argocd \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/argocd \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace argocd \
+  --sync-policy automated \
+  --self-heal \
+  --directory-recurse
+```
   
 
 
