@@ -10,4 +10,5 @@ spec:
       match: Host(`dashboard.k8s.test`)
       services:
         - name: kubernetes-dashboard
-          port: 80
+          port: 443
+
