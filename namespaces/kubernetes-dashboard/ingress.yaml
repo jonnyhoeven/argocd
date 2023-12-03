@@ -1,18 +1,13 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: kubernetes-dashboard
-  namespace: kubernetes-dashboard
-  labels:
-    app: kubernetes-dashboard
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
 spec:
-  rules:
-    - host: dashboard.k8s.test
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: kubernetes-dashboard
-              servicePort: 443
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dashboard.k8s.test`)
+      services:
+        - name: kubernetes-dashboard
+          port: 80
