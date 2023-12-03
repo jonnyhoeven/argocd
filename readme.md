@@ -168,7 +168,7 @@ argocd app create kube-system \
 
 
 
-kubectl create namespace kube-dashboard
+kubectl create namespace kubernetes-dashboard
 argocd app create kubernetes-dashboard \
   --repo https://github.com/jonnyhoeven/argocd.git \
   --path namespaces/kubernetes-dashboard \
