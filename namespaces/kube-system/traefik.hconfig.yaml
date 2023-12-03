@@ -6,7 +6,7 @@ metadata:
 spec:
   valuesContent: |-
     globalArguments:
-    - "--serversTransport.insecureSkipVerify=true"
+      - "--serversTransport.insecureSkipVerify=true"
     additionalArguments:
       - "--api"
       - "--api.dashboard=true"
