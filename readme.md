@@ -60,9 +60,9 @@ Use the internal IP numbers from node output for your hosts file.
 
 ### Setup hostname
 ```/etc/hosts
-localhost        argocd.k8s.test dashboard.k8s.test traefik.k8s.test
-localhost        argocd.k8s.test dashboard.k8s.test traefik.k8s.test
-localhost        argocd.k8s.test dashboard.k8s.test traefik.k8s.test
+172.23.0.2        argocd.k8s.test dashboard.k8s.test traefik.k8s.test guestbook.stb.k8s.test guestbook.sid.k8s.test
+172.23.0.3        argocd.k8s.test dashboard.k8s.test traefik.k8s.test guestbook.stb.k8s.test guestbook.sid.k8s.test
+172.23.0.4        argocd.k8s.test dashboard.k8s.test traefik.k8s.test guestbook.stb.k8s.test guestbook.sid.k8s.test
 ```
 
 ### expose traefik dashboard in k3s
@@ -152,6 +152,23 @@ argocd app create guestbook-stb \
   --allow-empty \
   --directory-recurse   
 curl -k -H "Host: guestbook.stb.k8s.test" https://guestbook.stb.k8s.test
+
+
+kubectl create namespace kubernetes-dashboard
+argocd app create kubernetes-dashboard \
+  --repo https://github.com/jonnyhoeven/argocd.git \
+  --path namespaces/kubernetes-dashboard \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace kubernetes-dashboard \
+  --sync-policy automated \
+  --self-heal \
+  --auto-prune \
+  --allow-empty \
+  --directory-recurse   
+curl -k -H "Host: dashboard.k8s.test" https://dashboard.k8s.test
+
+
+
 ```
 
 
